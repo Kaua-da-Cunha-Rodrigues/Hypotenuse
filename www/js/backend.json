@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "nome": "Kauã",
+        "email": "cunhakaua2@gmail.com",
+        "senha": "cunha0204",
+        "idade": 20
+    },
+    {
+        "id": 2,
+        "nome": "",
+        "email": "",
+        "senha": "",
+        "idade": 0
+    },
+    {
+        "id": 3,
+        "nome": "",
+        "email": "",
+        "senha": "",
+        "idade": 0
+    },
+    {
+        "id": 4,
+        "nome": "",
+        "email": "",
+        "senha": "",
+        "idade": 0
+    }
+]

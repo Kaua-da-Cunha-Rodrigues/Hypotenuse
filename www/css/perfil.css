@@ -1,0 +1,17 @@
+img{
+    z-index: 1;
+    width: 250px;
+}
+button{
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+button a{
+    color: white;
+    text-decoration: none;
+}
+button:hover{
+    background-color: rgba(0, 0, 0, 0.192);
+    transform: scale(1.01);
+}
