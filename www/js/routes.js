@@ -42,7 +42,9 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-		// fazer algo antes da página ser exibida
+			checkAuth()
+
+			getNameUser();
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -56,12 +58,12 @@ var app = new Framework7({
 	  }
     },
     {
-      path: '/pagamento/',
-      url: 'pagamento.html',
+      path: '/info/',
+      url: 'info.html',
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-		// fazer algo antes da página ser exibida
+			checkAuth()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -80,7 +82,7 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-		// fazer algo antes da página ser exibida
+			checkAuth()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -99,7 +101,7 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-		// fazer algo antes da página ser exibida
+			checkAuth()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -131,12 +133,31 @@ var app = new Framework7({
 		},
 	  }
     },
+	{
+		path: '/home/',
+		url: 'home.html',
+		animate: false,
+		on: {
+		  pageBeforeIn: function (event, page) {
+			checkAuth()
+		  },
+		  pageAfterIn: function (event, page) {
+		  // fazer algo depois da página ser exibida
+		  },
+		  pageInit: function (event, page) {
+		  // fazer algo quando a página for inicializada
+		  },
+		  pageBeforeRemove: function (event, page) {
+		  // fazer algo antes da página ser removida do DOM
+		  },
+		}
+	  },
   ],
   // ... other parameters
 });
 
 //Para testes direto no navegador
-var mainView = app.views.create('.view-main', { url: '/index/' });
+// var mainView = app.views.create('.view-main', { url: '/index/' });
 
 //EVENTO PARA SABER O ITEM DO MENU ATUAL
 app.on('routeChange', function (route) {
@@ -150,7 +171,6 @@ app.on('routeChange', function (route) {
     targetEl.classList.add('active');
   }
 });
-
 
 function onDeviceReady() {
   //Quando estiver rodando no celular
@@ -170,4 +190,21 @@ function onDeviceReady() {
     }
   }, false);
 
+}
+//checar login
+function checkAuth() {
+    if (!localStorage.getItem('loggedIn')) {
+        // Usuário não está autenticado, redirecionar para a página de login ou tomar outra ação
+        alert('Você precisa estar logado para acessar esta página.');
+        window.location.href = 'index.html';
+        return false; // Indica que o acesso não é permitido
+    }
+    return true; // Indica que o acesso é permitido
+}
+//pegar nome para o perfil
+function getNameUser() {
+	const nameUser = localStorage.getItem('nameUser');
+	const titleName = document.getElementById('nameUser');
+
+	titleName.innerText = nameUser;
 }

@@ -13,8 +13,7 @@
     <title>My App</title>
     <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="lib/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU-->
-    <link rel="stylesheet" href="css/pagamento.css">
+    
     <!--Ícones Material Design-->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
 
@@ -38,17 +37,26 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Nome</div>
                                 <div class="item-input-wrap">
-                                    <input type="text" name="name" placeholder="Digite seu nome" />
+                                    <input 
+                                        type="text" 
+                                        name="name" 
+                                        placeholder="Digite seu nome"
+                                        id="registerName"
+                                     />
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="item-content item-input">
                             <div class="item-inner">
                                 <div class="item-title item-label">E-mail</div>
                                 <div class="item-input-wrap">
-                                    <input type="email" name="email" placeholder="Digite seu E-mail" />
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        placeholder="Digite seu E-mail" 
+                                        id="registerEmail"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -57,7 +65,12 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Senha</div>
                                 <div class="item-input-wrap">
-                                    <input type="password" name="password" placeholder="Digite a senha" />
+                                    <input 
+                                        type="password" 
+                                        name="password" 
+                                        placeholder="Digite a senha" 
+                                        id="registerPassword"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -65,16 +78,24 @@
                             <div class="item-inner">
                                 <div class="item-title item-label">Idade</div>
                                 <div class="item-input-wrap">
-                                    <input type="number" name="idade" placeholder="Digite sua idade" />
+                                    <input 
+                                        type="number" 
+                                        name="idade" 
+                                        placeholder="Digite sua idade" 
+                                        id="registerAge"
+                                    />
                                 </div>
                             </div>
                         </div>
                             
 
                         <div class="d-flex block grid grid-cols-2 grid-gap">
-                            <button type="submit" class="button button-fill fill-form-from-data">
+                            <button type="button" class="button button-fill fill-form-from-data" onclick="register()">
                                 Cadastrar
                             </button>
+                            <div class="d-flex align-items-center">
+                                <a href="/index/" class="button button-tonal">Login</a> 
+                            </div>
                         </div>
 
                     </form>

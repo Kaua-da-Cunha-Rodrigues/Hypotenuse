@@ -1,65 +1,160 @@
-:root{
-    --cor0: #2d4354;    
-    --cor1: #73766a;    
-    --cor2: #243F65;    
-    --cor3: #2F6C82;    
-    --cor4: #534145;    
-    --cor5: #20212b;    
+:root {
+    --cor0: #2d4354;
+    --cor1: #73766a;
+    --cor2: #243F65;
+    --cor3: #2F6C82;
+    --cor4: #534145;
+    --cor5: #20212b;
 }
-.toolbar{
+
+.toolbar {
     height: 80px;
 }
 
-.tab-link{
+.tab-link {
     display: flex;
     justify-content: center;
     flex-flow: column wrap;
 }
 
-.toolbar-inner .link{    
-    flex:1;
-    height: 80px;  
-    line-height: 25px; 
-	font-weight:bold;    
+.toolbar-inner .link {
+    flex: 1;
+    height: 80px;
+    line-height: 25px;
+    font-weight: bold;
 }
 
-.toolbar-inner .link:not(.active){
-    color:gray;
-	font-weight:normal;
+.toolbar-inner .link:not(.active) {
+    color: gray;
+    font-weight: normal;
 }
 
-.toolbar-inner > .link i{
+.toolbar-inner>.link i {
     font-size: 28px;
 }
 
-.navbar-inner{
+.navbar-inner {
     background-color: var(--cor0);
     color: white;
 }
-.logo{
-    width: 50px;
+
+.logo {
+    width: 200px;
 }
-.tab-bar{
+
+.tab-bar {
     background-color: var(--cor3);
 }
-.tab-bar a{
+
+.tab-bar a {
     text-decoration: none;
 }
-.tab-bar a:hover{
+
+.tab-bar a:hover {
     background-color: #20212b27;
 }
 
 /*Perfil*/
-.fundo{
+.fundo {
     width: 100%;
     height: 120px;
     background-color: var(--cor0);
 }
-.page-content{
+
+.page-content {
     background: linear-gradient(var(--cor0), var(--cor2));
 }
-.conteudo-perfil{
+
+.conteudo-perfil {
     color: white;
     height: 100%;
     background-color: var(--cor5);
 }
+
+/*info*/
+.infoPayment {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--cor3);
+    color: white;
+}
+
+.infoPayment p {
+    font-weight: bold;
+}
+
+.infoPayment span {
+    font-weight: normal;
+}
+
+.infoPayment h2 {
+    color: var(--cor5);
+}
+
+/*vagas*/
+
+.bike-spots .parking-spot{
+    transform: rotate(45deg);
+}
+.eletric_car-spots .parking-spot{
+    transform: rotate(270deg);
+    margin: -20;
+}
+.parking-spot {
+    width: 100px;
+    height: 60px;
+    background-color: var(--cor0);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+.parking-spot img{
+    width: 90px;
+}
+.reverse-spots .parking-spot{
+    transform: rotate(180deg);
+}
+.parking-spot:hover {
+    background-color: var(--cor1);
+}
+.parking-spot.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sumary{
+    color: white; 
+    flex-wrap: wrap;   
+}
+.sumary .spot-type{
+    margin: 2px 2px 40px 2px;
+    
+}
+.sumary .spot-type div{
+    height: 25px;
+    width: 25px;
+    margin: 5px;
+}
+.sumary .spot-type .free{
+    background-color: white;
+}
+.sumary .spot-type .occuped{
+    background-color: red;
+}
+.sumary .spot-type .special{
+    background-color: yellow;
+}
+.sumary .spot-type .eletric{
+    background-color: lightblue;
+}
+.sumary .spot-type .selected{
+    background-color: #4CAF50;
+}
+
+
+

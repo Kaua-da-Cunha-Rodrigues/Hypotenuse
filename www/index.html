@@ -37,7 +37,7 @@
             <!-- TAB BAR-->
             <div class="tab-bar toolbar toolbar-bottom">
                 <div class="toolbar-inner display-flex">
-                    <a href="/index/" class="tab-link link active text-light">
+                    <a href="/home/" class="tab-link link active text-light">
                         <i class="mdi mdi-home"></i>
                         <span>Home</span>
                     </a>
@@ -45,7 +45,7 @@
                         <i class="mdi mdi-account"></i>
                         <span>Perfil</span>
                     </a>
-                    <a href="/pagamento/" class="tab-link link text-light">
+                    <a href="/info/" class="tab-link link text-light">
                         <i class="mdi mdi-cash"></i>
                         <span>Pagamento</span>
                     </a>
@@ -53,11 +53,6 @@
                         <i class="mdi mdi-car"></i>
                         <span class="">Vagas</span>
                     </a>
-                    <a href="/register/" class="tab-link link text-light">
-                        <i class="mdi mdi-car"></i>
-                        <span class="">register</span>
-                    </a>
-
                 </div>
             </div>
 
@@ -68,47 +63,57 @@
                 <div class="navbar">
                     <div class="navbar-bg"></div>
                     <div class="navbar-inner">
-                        <img src="img/logo.png" alt="Logo" class="logo">
                         <h1 class="title">Hypotenuse</h1>
                     </div>
                 </div>
 
                 <!-- Scrollable page content -->
 
-                <div class="d-flex justify-content-center align-items-center page-content">
-                    <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="my-form">
-
+                <div class="d-flex flex-column align-items-center justify-content-center page-content">
+                    <div>
+                        <img src="img/logo.png" alt="Logo" class="logo">
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="my-form">
                         
                         
-                        <div class="item-content item-input">
-                            <div class="item-inner">
-                                <div class="item-title item-label">E-mail</div>
-                                <div class="item-input-wrap">
-                                    <input type="email" name="email" placeholder="Digite o E-mail" />
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">E-mail</div>
+                                    <div class="item-input-wrap">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Digite o E-mail"
+                                            id="loginEmail"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item-content item-input">
-                            <div class="item-inner">
-                                <div class="item-title item-label">Senha</div>
-                                <div class="item-input-wrap">
-                                    <input type="password" name="password" placeholder="Digite a senha" />
+                            <div class="item-content item-input">
+                                <div class="item-inner">
+                                    <div class="item-title item-label">Senha</div>
+                                    <div class="item-input-wrap">
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="Digite a senha"
+                                            id="loginPassword"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         
-
-
                         
-                        <div class=" block grid grid-cols-2 grid-gap">
-                            <div class="d-flex align-items-center">
-                                <a href="#" class="text-light">Não tem cadastro?</a>
+                            <div class=" block grid grid-cols-2 grid-gap">
+                                <div class="d-flex align-items-center">
+                                    <a href="/register/" class="text-light">Não tem cadastro?</a>
+                                </div>
+                                <button type="button" class="button button-fill fill-form-from-data" onclick="login()">
+                                    Entrar
+                                </button>
                             </div>
-                            <button type="button" class="button button-fill fill-form-from-data" id="botaoLogin">
-                                Entrar
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

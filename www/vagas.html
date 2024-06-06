@@ -13,11 +13,11 @@
     <title>My App</title>
     <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="lib/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU-->
-    <link rel="stylesheet" href="css/vagas.css">
     <!--Ícones Material Design-->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
-
+    
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/vagas.css">
 
 </head>
 
@@ -33,8 +33,123 @@
 
                 <!-- Scrollable page content -->
                 <div class="page-content">
-                    <div class="block">
-                        Conteúdo vagas
+                    <div class="paking-spots mt-5 ml-2">
+                        <div class="bike-eletric_car-spots d-flex justify-content-between mb-2">
+                            <div class="bike-spots d-flex">
+                                <div class="parking-spot" id="spotM1" onclick="selectSpot('spotM1')">
+                                    <img src="img/bike-spot.png" alt="bike-spot">
+                                </div>
+                                <div class="parking-spot" id="spotM2" onclick="selectSpot('spotM2')">
+                                    <img src="img/bike-spot.png" alt="bike-spot">
+                                </div>
+                                
+                            </div>
+                            <div class="eletric_car-spots d-flex">
+                                <div class="parking-spot" id="spotE1" onclick="selectSpot('spotE1')">
+                                    <img src="img/eletric-spot.png" alt="eletric-spot">
+                                </div>
+                                <div class="parking-spot" id="spotE2" onclick="selectSpot('spotE2')">
+                                    <img src="img/eletric-spot.png" alt="eletric-spot">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="car-spots d-flex justify-content-between">
+                            <div class="block">
+                                <div class="parking-spot" id="spot1" onclick="selectSpot('spot1')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot2" onclick="selectSpot('spot2')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot3" onclick="selectSpot('spot3')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot4" onclick="selectSpot('spot4')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot5" onclick="selectSpot('spot5')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                            </div>
+                            <div class="block d-flex">
+                                <div class="reverse-spots">
+                                    <div class="parking-spot" id="spot6" onclick="selectSpot('spot6')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot7" onclick="selectSpot('spot7')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot8" onclick="selectSpot('spot8')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot9" onclick="selectSpot('spot9')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot10" onclick="selectSpot('spot10')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="parking-spot" id="spot11" onclick="selectSpot('spot11')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot12" onclick="selectSpot('spot12')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot13" onclick="selectSpot('spot13')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot14" onclick="selectSpot('spot14')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                    <div class="parking-spot" id="spot15" onclick="selectSpot('spot15')">
+                                        <img src="img/open-spot.png" alt="car-spot">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block">
+                                <div class="parking-spot" id="spot16" onclick="selectSpot('spot16')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot17" onclick="selectSpot('spot17')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot18" onclick="selectSpot('spot18')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot19" onclick="selectSpot('spot19')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                                <div class="parking-spot" id="spot20" onclick="selectSpot('spot20')">
+                                    <img src="img/open-spot.png" alt="car-spot">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sumary d-flex justify-content-center">
+                        <div class="spot-type d-flex align-items-center">
+                            <div class="free"></div>
+                            Livre
+                        </div>
+                        <div class="spot-type d-flex align-items-center">
+                            <div class="occuped"></div>
+                            Ocupado
+                        </div>
+                        <div class="spot-type d-flex align-items-center">
+                            <div class="special"></div>
+                            Especial
+                        </div>
+                        <div class="spot-type d-flex align-items-center">
+                            <div class="eletric"></div>
+                            Elétrico
+                        </div>
+                        <div class="spot-type d-flex align-items-center">
+                            <div class="selected"></div>
+                            Selecionado
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="block col-4 button button-fill">Confirmar Vaga</button>
                     </div>
                 </div>
             </div>
@@ -47,6 +162,7 @@
     <!-- Roteamento do app-->
     <script type="text/javascript" src="js/routes.js"></script>
     <script src="cordova.js"></script>
+    <script src="js/vagas.js"></script>
 </body>
 
 </html>

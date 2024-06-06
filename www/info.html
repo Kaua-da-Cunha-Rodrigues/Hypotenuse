@@ -14,7 +14,7 @@
     <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="lib/framework7-bundle.min.css">
     <!-- CSS PERSONALIZADO PARA MENU-->
-    <link rel="stylesheet" href="css/pagamento.css">
+    <link rel="stylesheet" href="css/info.css">
     <!--Ícones Material Design-->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
 
@@ -33,7 +33,16 @@
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
-                        Conteúdo pagamento
+                        <h1 class="text-light">R$ ##,##</h1>
+                    </div>
+                    <div class="infoPayment">
+                        <h2 class="mb-4">Informações</h2>    
+                        <p>Vaga: <span id="vaga"></span></p>
+                        <p>Tempo Usado: <span id="time"></span></p>
+                        <p>Valor p/ hora :  <span id="price">R$</span></p>
+                    </div>
+                    <div class="block">
+                        <button class="button button-fill button-round">Finalizar e pagar</button>
                     </div>
                 </div>
             </div>
