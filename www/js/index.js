@@ -26,6 +26,7 @@ function register() {
         // Redirecionar ou mostrar mensagem de sucesso
         alert("Usuário cadastrado com sucesso!");
         router.navigate('/index/');
+        // window.location.href = 'index.html';
     } else {
         alert("Por favor, preencha todos os campos.");
     }
@@ -46,25 +47,31 @@ function login() {
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('nameUser', user.name);
         router.navigate('/home/');
+        // window.location.href = 'home.html';
     } else {
         alert("Credenciais inválidas. Por favor, tente novamente.");
     }
 }
 function logout() {
-    // Limpar dados de autenticação do localStorage
-    localStorage.removeItem('loggedInUser');
 
     // Redirecionar para a página de login ou fazer qualquer outra ação necessária
     alert("Logout realizado com sucesso!");
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('nameUser');
+    deleteInfos();
     router.navigate('/index/');
+    // window.location.href = 'index.html';
 }
 
 
 //Vagas
 
 let selectedSpotId = null;
+let startTime = null;
+let costPerHour = 5.22; // Valor por hora
+let timerInterval;
+
+localStorage.setItem("costHour", parseFloat(costPerHour));
 
 function selectSpot(spotId) {
     // Limpa a seleção anterior, se houver
@@ -78,11 +85,55 @@ function selectSpot(spotId) {
 }
 
 function confirmSelection() {
+
+    //verifica se ja existe uma vaga ativa
+    if(localStorage.getItem('vacancy')){
+        return alert("uma vaga já está ativa")
+    }
+
+    //se tiver sido selecionado um spot em "vagas"
     if (selectedSpotId) {
+         
         alert(`Vaga selecionada: ${selectedSpotId}`);
-        // Aqui você pode guardar o identificador em uma variável, enviar para o servidor, etc.
+        startTime = new Date(); // Marca o horário de início
+
+        localStorage.setItem("vacancy", selectedSpotId);
+
+        startTimer();
+        window.location.href = 'info.html';
+        // router.navigate('/info/');
     } else {
         alert('Por favor, selecione uma vaga antes de confirmar.');
     }
+}
+function startTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+    }
+    timerInterval = setInterval(updateTimer(), 1000); // Atualiza a cada minuto
+}
+function updateTimer() {
+    console.log("oi");
+    const currentTime = new Date();
+    const minutes = Math.floor((currentTime - startTime) / (1000 * 60)); // Calcula o tempo decorrido em minutos
+    const cost = minutes * costPerHour / 60; // Calcula o custo
+    localStorage.setItem("minutes", minutes);
+    localStorage.setItem("cost", cost);
+
+}
+
+function paymentVacancy() {
+    // Limpar dados de autenticação do localStorage
+    deleteInfos();
+
+    router.navigate('/pagamento/');
+    // window.location.href = 'pagamento.html';
+}
+
+function deleteInfos() {
+    localStorage.removeItem('vacancy');
+    localStorage.removeItem("minutes");
+    localStorage.removeItem("cost");
+    localStorage.removeItem("costHour");
 }
 

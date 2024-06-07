@@ -4,9 +4,9 @@ var app = new Framework7({
   // App root element
   el: '#app',
   // App Name
-  name: 'My App',
+  name: 'Hypotenuse',
   // App id
-  id: 'com.myapp.test',
+  id: 'com.hypotenuse.test',
   // Enable swipe panel
   panel: {
     swipe: true,
@@ -24,6 +24,7 @@ var app = new Framework7({
 	  on: {
 		pageBeforeIn: function (event, page) {
 		// fazer algo antes da página ser exibida
+		
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -63,7 +64,8 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-			checkAuth()
+			app.views.main.router.navigate("/vagas/")
+
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -77,6 +79,7 @@ var app = new Framework7({
 	  }
     },
     {
+	  name: 'vagas',
       path: '/vagas/',
       url: 'vagas.html',
       animate: false,
@@ -157,7 +160,7 @@ var app = new Framework7({
 });
 
 //Para testes direto no navegador
-// var mainView = app.views.create('.view-main', { url: '/index/' });
+var mainView = app.views.create('.view-main', { url: '/index/' });
 
 //EVENTO PARA SABER O ITEM DO MENU ATUAL
 app.on('routeChange', function (route) {
@@ -191,6 +194,9 @@ function onDeviceReady() {
   }, false);
 
 }
+
+var router = app.views.main.router;
+
 //checar login
 function checkAuth() {
     if (!localStorage.getItem('loggedIn')) {
@@ -201,10 +207,25 @@ function checkAuth() {
     }
     return true; // Indica que o acesso é permitido
 }
+function checkVacancy() {
+    
+}
 //pegar nome para o perfil
 function getNameUser() {
 	const nameUser = localStorage.getItem('nameUser');
 	const titleName = document.getElementById('nameUser');
 
 	titleName.innerText = nameUser;
+}
+function getInfoVacancy(){
+	const costHour = localStorage.getItem("costHour");
+	const vacancy = localStorage.getItem("vacancy");
+	const minutes = localStorage.getItem("minutes");
+    const cost = localStorage.getItem("cost");
+
+	//escreve na página
+	document.getElementById("totalCost").textContent += `R$ ${cost}`
+	document.getElementById("vacancy").textContent = vacancy
+	document.getElementById('time').textContent = `${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}`;
+    document.getElementById('price').textContent = `R$ ${costHour}`;
 }

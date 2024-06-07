@@ -120,7 +120,7 @@
     transform: rotate(180deg);
 }
 .parking-spot:hover {
-    background-color: var(--cor1);
+    background-color: #4CAF50;
 }
 .parking-spot.selected {
     background-color: #4CAF50;

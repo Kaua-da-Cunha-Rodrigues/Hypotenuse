@@ -28,21 +28,21 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="pagamento" class="page">
+            <div data-name="info" class="page">
 
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
-                        <h1 class="text-light">R$ ##,##</h1>
+                        <h1 class="text-light" id="totalCost"></h1>
                     </div>
                     <div class="infoPayment">
                         <h2 class="mb-4">Informações</h2>    
-                        <p>Vaga: <span id="vaga"></span></p>
+                        <p>Vaga: <span id="vacancy"></span></p>
                         <p>Tempo Usado: <span id="time"></span></p>
-                        <p>Valor p/ hora :  <span id="price">R$</span></p>
+                        <p>Valor p/ hora :  <span id="price"></span></p>
                     </div>
                     <div class="block">
-                        <button class="button button-fill button-round">Finalizar e pagar</button>
+                        <button class="button button-fill button-round" onclick="paymentVacancy()">Finalizar e pagar</button>
                     </div>
                 </div>
             </div>
