@@ -24,7 +24,7 @@ var app = new Framework7({
 	  on: {
 		pageBeforeIn: function (event, page) {
 			if (localStorage.getItem('loggedIn')) {
-				app.views.main.router.navigate("/vagas/")		
+				app.views.main.router.navigate("/home/")		
 			}
 		},
 		pageAfterIn: function (event, page) {
@@ -46,6 +46,7 @@ var app = new Framework7({
 		pageBeforeIn: function (event, page) {
 			checkAuth()
 			getNameUser();
+			displayUserProfile()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -138,6 +139,25 @@ var app = new Framework7({
 	  }
     },
 	{
+		path: '/edit/',
+		url: 'edit.html',
+		animate: false,
+		on: {
+		  pageBeforeIn: function (event, page) {
+			checkAuth()
+		  },
+		  pageAfterIn: function (event, page) {
+		  // fazer algo depois da página ser exibida
+		  },
+		  pageInit: function (event, page) {
+		  // fazer algo quando a página for inicializada
+		  },
+		  pageBeforeRemove: function (event, page) {
+		  // fazer algo antes da página ser removida do DOM
+		  },
+		}
+	  },
+	{
 		path: '/home/',
 		url: 'home.html',
 		animate: false,
@@ -221,6 +241,21 @@ function getNameUser() {
 	const titleName = document.getElementById('nameUser');
 
 	titleName.innerText = nameUser;
+}
+function displayUserProfile() {
+    const profileImageDisplay = document.getElementById('userImg');
+    // Obter o usuário autenticado do localStorage
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    
+    if (loggedInUser) {
+        // Exibir a imagem de perfil do usuário autenticado
+        profileImageDisplay.src = loggedInUser.imgUser;
+    } else {
+        alert("Usuário não autenticado. Faça login novamente.");
+        // Redirecionar para a página de login
+        router.navigate('/index/');
+        // window.location.href = 'index.html';
+    }
 }
 function getInfoVacancy(){
 	const costHour = localStorage.getItem("costHour");

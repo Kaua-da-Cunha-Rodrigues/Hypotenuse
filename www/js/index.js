@@ -19,14 +19,13 @@ function register() {
             return;
         }
 
-        // Adicionar novo usuário
-        users.push({ name, email, password, age });
+        // Adicionar novo usuário com imgUser padrão
+        users.push({ name, email, password, age, imgUser: 'img/user.png' });
         localStorage.setItem('users', JSON.stringify(users));
 
         // Redirecionar ou mostrar mensagem de sucesso
         alert("Usuário cadastrado com sucesso!");
         router.navigate('/index/');
-        // window.location.href = 'index.html';
     } else {
         alert("Por favor, preencha todos os campos.");
     }
@@ -46,23 +45,67 @@ function login() {
         alert(`Bem-vindo, ${user.name}!`);
         localStorage.setItem('loggedIn', 'true');
         localStorage.setItem('nameUser', user.name);
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
         router.navigate('/home/');
-        // window.location.href = 'home.html';
     } else {
         alert("Credenciais inválidas. Por favor, tente novamente.");
     }
 }
 function logout() {
 
+    if(localStorage.getItem('vacancy')){
+        return alert("Não é possível trocar de usuário pois há uma vaga ativa")
+    }
     // Redirecionar para a página de login ou fazer qualquer outra ação necessária
     alert("Logout realizado com sucesso!");
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('nameUser');
     deleteInfos();
     router.navigate('/index/');
-    // window.location.href = 'index.html';
+}
+function editProfile() {
+    const profileImageInput = document.getElementById('imgUser');
+    const profileImage = profileImageInput.files[0];
+
+    if (profileImage) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const newImageUrl = e.target.result;
+            updateProfileImage(newImageUrl);
+        };
+        reader.readAsDataURL(profileImage);
+    } else {
+        alert("Por favor, selecione uma imagem.");
+    }
 }
 
+function updateProfileImage(newImageUrl) {
+    // Obter o usuário autenticado do localStorage
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (loggedInUser) {
+        // Atualizar a imagem de perfil do usuário autenticado
+        loggedInUser.imgUser = newImageUrl;
+        // Atualizar o usuário no localStorage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let updatedUsers = users.map(user => {
+            if (user.email === loggedInUser.email) {
+                return loggedInUser;
+            }
+            return user;
+        });
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+        
+        // Atualizar a sessão do usuário autenticado
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+        
+        alert("Imagem de perfil atualizada com sucesso!");
+         // Atualiza a exibição da imagem de perfil na página
+    } else {
+        alert("Usuário não autenticado. Faça login novamente.");
+        // Redirecionar para a página de login
+        }
+    window.location.href = 'index.html';
+}
 
 //Vagas
 
@@ -116,8 +159,7 @@ function confirmSelection() {
         
 
         startTimer();
-        // window.location.href = 'info.html';
-        // router.navigate('/info/');
+        router.navigate('/info/');
     } else {
         alert('Por favor, selecione uma vaga antes de confirmar.');
     }
@@ -127,7 +169,7 @@ function confirmSelection() {
 
 let timerInterval;
 let timerCost;
-let costPerHour = 5;
+let costPerHour = 8;
 let cost = 0;
 let seconds = 0;
 let minutes = 0;
