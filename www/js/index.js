@@ -67,13 +67,8 @@ function logout() {
 //Vagas
 
 let selectedSpotId = null;
-let startTime = null;
-let costPerHour = 5.22; // Valor por hora
-let timerInterval;
-
-localStorage.setItem("costHour", parseFloat(costPerHour));
-
-function selectSpot(spotId) {
+let selectedSpotImg = null;
+function selectSpot(spotId, imgSpot) {
     // Limpa a seleção anterior, se houver
     if (selectedSpotId) {
         document.getElementById(selectedSpotId).classList.remove('selected');
@@ -82,6 +77,7 @@ function selectSpot(spotId) {
     // Seleciona o novo spot
     document.getElementById(spotId).classList.add('selected');
     selectedSpotId = spotId;
+    selectedSpotImg = imgSpot;
 }
 
 function confirmSelection() {
@@ -93,41 +89,152 @@ function confirmSelection() {
 
     //se tiver sido selecionado um spot em "vagas"
     if (selectedSpotId) {
-         
+        
         alert(`Vaga selecionada: ${selectedSpotId}`);
-        startTime = new Date(); // Marca o horário de início
-
+        
         localStorage.setItem("vacancy", selectedSpotId);
+        
+        //Puxa todas as vagas ocupadas da sessão
+        let busyVacancys = JSON.parse(localStorage.getItem('busyVacancys')) || [];
+
+        //recebe a tag de imagem daquela vaga
+        let vacancy = document.getElementById(selectedSpotImg)
+
+        //Marca a vaga como ocupada
+        vacancy.classList.add("busy")
+
+        if(busyVacancys.length != 0){
+
+            if(!busyVacancys.includes(selectedSpotImg)){
+                busyVacancys.push(selectedSpotImg)   
+            }
+        }else{
+            busyVacancys.push(selectedSpotImg)   
+        }
+        //atualiza no storage
+        localStorage.setItem('busyVacancys', JSON.stringify(busyVacancys));
+        
 
         startTimer();
-        window.location.href = 'info.html';
+        // window.location.href = 'info.html';
         // router.navigate('/info/');
     } else {
         alert('Por favor, selecione uma vaga antes de confirmar.');
     }
 }
-function startTimer() {
-    if (timerInterval) {
-      clearInterval(timerInterval);
-    }
-    timerInterval = setInterval(updateTimer(), 1000); // Atualiza a cada minuto
-}
-function updateTimer() {
-    console.log("oi");
-    const currentTime = new Date();
-    const minutes = Math.floor((currentTime - startTime) / (1000 * 60)); // Calcula o tempo decorrido em minutos
-    const cost = minutes * costPerHour / 60; // Calcula o custo
-    localStorage.setItem("minutes", minutes);
-    localStorage.setItem("cost", cost);
 
+//info
+
+let timerInterval;
+let timerCost;
+let costPerHour = 5;
+let cost = 0;
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+
+function startTimer() {
+    // Armazena a hora de início no localStorage
+    const startTime = new Date().getTime();
+    localStorage.setItem('startTime', startTime);
+
+    localStorage.setItem('vacancyTime', true);
+    localStorage.setItem("costHour", costPerHour);
+
+    // Inicia o timer para atualizar o display a cada segundo
+    timerInterval = setInterval(updateTimer, 1000);
+
+    // Inicia o timer para atualizar o custo a cada minuto
+    timerCost = setInterval(updateCost, 1000 * 60);
+}
+
+function resetTimer() {
+    // Encerra os intervalos
+    clearInterval(timerInterval);
+    clearInterval(timerCost);
+
+    // Reseta os valores
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    cost = 0;
+    localStorage.setItem('hours', hours);
+    localStorage.setItem('minutes', minutes);
+    localStorage.setItem('seconds', seconds);
+    localStorage.setItem('cost', cost);
+
+    updateDisplay();
+}
+
+function updateCost(){
+    cost = (minutes + (hours * 60)) * (costPerHour / 60);
+    localStorage.setItem('cost', cost);
+    updateDisplay();
+}
+
+function updateTimer() {
+    const startTime = parseInt(localStorage.getItem('startTime'), 10);
+    const currentTime = new Date().getTime();
+    const elapsedTime = Math.floor((currentTime - startTime) / 1000); // tempo decorrido em segundos
+
+    seconds = elapsedTime % 60;
+    minutes = Math.floor(elapsedTime / 60) % 60;
+    hours = Math.floor(elapsedTime / 3600);
+
+    updateCost();
+    updateDisplay();
+}
+
+function updateDisplay() {
+    let pagina = sessionStorage.getItem('currentRoute');
+
+    // Pega os valores do localStorage
+    let horas = hours;
+    let minutos = minutes;
+    let segundos = seconds;
+    let custo = parseFloat(localStorage.getItem('cost'));
+
+    // Escreve o valor do timer
+    const formattedTime = pad(horas) + ':' + pad(minutos) + ':' + pad(segundos);
+
+    // Se a página que está aparecendo não for a de informações, não muda os valores no html
+    if (pagina === '/info/') {
+        document.getElementById('time').textContent = formattedTime;
+
+        // Escreve o valor do custo
+        document.getElementById('totalCost').textContent = `R$ ${custo.toFixed(2)}`;
+    }
+}
+
+function pad(num) {
+    return (num < 10) ? '0' + num : num;
 }
 
 function paymentVacancy() {
+
+    //pega as vagas ocupadas
+    let busyVacancys = JSON.parse(localStorage.getItem('busyVacancys')) || [];
+
+    //pega a vaga que o usuário ocupou
+    let atualVacancy = 'img' + localStorage.getItem('vacancy')
+    console.log(atualVacancy);
+
+    //procura a vaga que ele deseja desocupar dentro da lista de vagas ocupadas
+    let freeVacancy = busyVacancys.indexOf(atualVacancy)
+
+    //se ele encontrar o valor, dá tira ele da lista para virar open-spot
+    if (freeVacancy !== -1) {
+        // Remove o valor do array
+        busyVacancys.splice(freeVacancy, 1);
+    }
+    //Atualiza a lista de vagas ocupadas
+    localStorage.setItem('busyVacancys', JSON.stringify(busyVacancys));
+    
     // Limpar dados de autenticação do localStorage
     deleteInfos();
 
-    router.navigate('/pagamento/');
-    // window.location.href = 'pagamento.html';
+    // router.navigate('/pagamento/');
+    window.location.href = 'index.html';
 }
 
 function deleteInfos() {
@@ -135,5 +242,22 @@ function deleteInfos() {
     localStorage.removeItem("minutes");
     localStorage.removeItem("cost");
     localStorage.removeItem("costHour");
+    localStorage.removeItem('startTime');
 }
+
+// Carregar os valores e iniciar o timer quando a página for carregada
+window.onload = function() {
+    const startTime = localStorage.getItem('startTime');
+
+    // Verifica se o timer estava ativo antes de fechar a página
+    if (localStorage.getItem('vacancyTime') === 'true' && startTime !== null) {
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
+        timerCost = setInterval(updateCost, 1000 * 60);
+    }
+
+    updateDisplay();
+};
+
+
 

@@ -23,8 +23,9 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-		// fazer algo antes da página ser exibida
-		
+			if (localStorage.getItem('loggedIn')) {
+				app.views.main.router.navigate("/vagas/")		
+			}
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -44,7 +45,6 @@ var app = new Framework7({
 	  on: {
 		pageBeforeIn: function (event, page) {
 			checkAuth()
-
 			getNameUser();
 		},
 		pageAfterIn: function (event, page) {
@@ -64,8 +64,8 @@ var app = new Framework7({
       animate: false,
 	  on: {
 		pageBeforeIn: function (event, page) {
-			app.views.main.router.navigate("/vagas/")
-
+			checkVacancy()
+			getInfoVacancy()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -86,6 +86,7 @@ var app = new Framework7({
 	  on: {
 		pageBeforeIn: function (event, page) {
 			checkAuth()
+			rendImg()
 		},
 		pageAfterIn: function (event, page) {
 		// fazer algo depois da página ser exibida
@@ -158,7 +159,6 @@ var app = new Framework7({
   ],
   // ... other parameters
 });
-
 //Para testes direto no navegador
 var mainView = app.views.create('.view-main', { url: '/index/' });
 
@@ -166,6 +166,7 @@ var mainView = app.views.create('.view-main', { url: '/index/' });
 app.on('routeChange', function (route) {
   var currentRoute = route.url;
   console.log(currentRoute);
+  sessionStorage.setItem('currentRoute', currentRoute)
   document.querySelectorAll('.tab-link').forEach(function (el) {
     el.classList.remove('active');
   });
@@ -195,8 +196,6 @@ function onDeviceReady() {
 
 }
 
-var router = app.views.main.router;
-
 //checar login
 function checkAuth() {
     if (!localStorage.getItem('loggedIn')) {
@@ -208,7 +207,13 @@ function checkAuth() {
     return true; // Indica que o acesso é permitido
 }
 function checkVacancy() {
-    
+	if (!localStorage.getItem('vacancy')) {
+        
+        alert('Nenhuma vaga selecionada');
+        window.location.href = 'index.html';
+        return false; // Indica que o acesso não é permitido
+    }
+    return true; // Indica que o acesso é permitido    
 }
 //pegar nome para o perfil
 function getNameUser() {
@@ -224,8 +229,40 @@ function getInfoVacancy(){
     const cost = localStorage.getItem("cost");
 
 	//escreve na página
-	document.getElementById("totalCost").textContent += `R$ ${cost}`
 	document.getElementById("vacancy").textContent = vacancy
-	document.getElementById('time').textContent = `${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}`;
     document.getElementById('price').textContent = `R$ ${costHour}`;
+
+	
+}
+
+function rendImg(){
+	let VacancysImg = document.querySelectorAll(".imgSpot")
+
+	//puxa a lista de vagas que estão ocupadas
+	let busyVacancys = JSON.parse(localStorage.getItem('busyVacancys')) || [];
+	//guarda isso dentro de um set
+	const idsProcurados = new Set(busyVacancys)
+
+	//para cada imagem dentro de uma vaga
+	VacancysImg.forEach((img) =>{
+		//se o id de vaga ocupada for detectado, ele substitui a imagem para a busy
+		if(idsProcurados.has(img.id)){
+			if(img.classList.contains('bike')){
+				img.setAttribute('src', 'img/bike-busy-spot.png')    
+			}else{
+				img.setAttribute('src', 'img/busy-spot.png')
+			}
+		//se a vaga não estiver ocupada, seleciona a imagem conforme o especificamento de cada vaga (bike, elétrica, especial e normal)
+		}else{
+			if(img.classList.contains('bike')){
+				img.setAttribute('src', 'img/bike-spot.png')    
+			}else if(img.classList.contains('special')){
+				img.setAttribute('src', 'img/special-spot.png')
+			}else if(img.classList.contains('eletric')){
+				img.setAttribute('src', 'img/eletric-spot.png')
+			}else{
+				img.setAttribute('src', 'img/open-spot.png')
+			}
+		}	
+	})
 }
