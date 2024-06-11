@@ -1,10 +1,11 @@
 :root {
     --cor0: #2d4354;
-    --cor1: #73766a;
-    --cor2: #243F65;
+    --cor1: #51718B;
+    --cor2: #12202B;
     --cor3: #2F6C82;
-    --cor4: #534145;
+    --cor4: #43C6A3;
     --cor5: #20212b;
+    --cor6: #2FAD8D;
 }
 
 .toolbar {
@@ -33,10 +34,7 @@
     font-size: 28px;
 }
 
-.navbar-inner {
-    background-color: var(--cor0);
-    color: white;
-}
+
 
 .logo {
     width: 200px;
@@ -70,6 +68,44 @@
     height: 100%;
     background-color: var(--cor5);
 }
+.imgAgent{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.card{
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.089);
+    border: none;
+    color: white;
+
+    display: flex;
+    align-items: center;
+}
+.card .nameAgent{
+    color: var(--cor4);
+}
+.card .speciality, .card .nameAgent{
+    text-align: center;
+}
+.card .agentEmail{
+    font-size: 9px;
+}
+/*home*/
+iframe{
+    border-radius: 5px;
+}
+#obs{
+    font-size: 8px;
+    background-color: black;
+}
+.text p{
+    text-align: justify;
+}
+.homeInfo span{
+    color: var(--cor4);
+}
 
 /*info*/
 .infoPayment {
@@ -89,7 +125,10 @@
 }
 
 .infoPayment h2 {
-    color: var(--cor5);
+    color: var(--cor2);
+}
+#totalCost{
+    color: var(--cor4);
 }
 
 /*vagas*/
@@ -102,8 +141,8 @@
     margin: -20;
 }
 .parking-spot {
-    width: 100px;
-    height: 60px;
+    width: 80px;
+    height: 40px;
     background-color: var(--cor0);
     border: 1px solid black;
     display: flex;
@@ -114,16 +153,16 @@
     transition: background-color 0.3s ease;
 }
 .parking-spot img{
-    width: 90px;
+    width: 60px;
 }
 .reverse-spots .parking-spot{
     transform: rotate(180deg);
 }
 .parking-spot:hover {
-    background-color: #4CAF50;
+    background-color: var(--cor6);
 }
 .parking-spot.selected {
-    background-color: #4CAF50;
+    background-color: var(--cor6);
     color: white;
 }
 
@@ -153,7 +192,15 @@
     background-color: lightblue;
 }
 .sumary .spot-type .selected{
-    background-color: #4CAF50;
+    background-color: var(--cor6);
+}
+.md .button{
+    background-color: var(--cor4);
+    color: black;
+}
+.md .button#buttonLogin{
+    background-color: var(--cor1);
+    color: white;
 }
 
 

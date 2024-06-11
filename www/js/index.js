@@ -20,7 +20,7 @@ function register() {
         }
 
         // Adicionar novo usuário com imgUser padrão
-        users.push({ name, email, password, age, imgUser: 'img/user.png' });
+        users.push({ name, email, password, age, imgUser: 'img/user.jpg' });
         localStorage.setItem('users', JSON.stringify(users));
 
         // Redirecionar ou mostrar mensagem de sucesso
@@ -135,24 +135,28 @@ function confirmSelection() {
         
         alert(`Vaga selecionada: ${selectedSpotId}`);
         
+        //Gera o id que deve ser digitado no totem Hypotenuse
+        let vacancyId = generateIdVacancy();
+
         localStorage.setItem("vacancy", selectedSpotId);
+        localStorage.setItem('vacancyId', vacancyId);
         
         //Puxa todas as vagas ocupadas da sessão
         let busyVacancys = JSON.parse(localStorage.getItem('busyVacancys')) || [];
 
         //recebe a tag de imagem daquela vaga
-        let vacancy = document.getElementById(selectedSpotImg)
+        let vacancy = document.getElementById(selectedSpotImg);
 
         //Marca a vaga como ocupada
-        vacancy.classList.add("busy")
+        vacancy.classList.add("busy");
 
         if(busyVacancys.length != 0){
 
             if(!busyVacancys.includes(selectedSpotImg)){
-                busyVacancys.push(selectedSpotImg)   
+                busyVacancys.push(selectedSpotImg) ;  
             }
         }else{
-            busyVacancys.push(selectedSpotImg)   
+            busyVacancys.push(selectedSpotImg);   
         }
         //atualiza no storage
         localStorage.setItem('busyVacancys', JSON.stringify(busyVacancys));
@@ -163,6 +167,15 @@ function confirmSelection() {
     } else {
         alert('Por favor, selecione uma vaga antes de confirmar.');
     }
+}
+function generateIdVacancy(){
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let codigo = '';
+    for (let i = 0; i < 6; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres.charAt(indiceAleatorio);
+    }
+    return codigo;
 }
 
 //info
@@ -259,7 +272,6 @@ function paymentVacancy() {
 
     //pega a vaga que o usuário ocupou
     let atualVacancy = 'img' + localStorage.getItem('vacancy')
-    console.log(atualVacancy);
 
     //procura a vaga que ele deseja desocupar dentro da lista de vagas ocupadas
     let freeVacancy = busyVacancys.indexOf(atualVacancy)
@@ -274,9 +286,9 @@ function paymentVacancy() {
     
     // Limpar dados de autenticação do localStorage
     deleteInfos();
+    
 
-    // router.navigate('/pagamento/');
-    window.location.href = 'index.html';
+    router.navigate('/pagamento/');
 }
 
 function deleteInfos() {
@@ -285,6 +297,7 @@ function deleteInfos() {
     localStorage.removeItem("cost");
     localStorage.removeItem("costHour");
     localStorage.removeItem('startTime');
+    localStorage.removeItem('vacancyId');
 }
 
 // Carregar os valores e iniciar o timer quando a página for carregada

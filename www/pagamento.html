@@ -13,10 +13,10 @@
     <title>My App</title>
     <!-- Path to Framework7 Library Bundle CSS -->
     <link rel="stylesheet" href="lib/framework7-bundle.min.css">
-    <!-- CSS PERSONALIZADO PARA MENU-->
-    <link rel="stylesheet" href="css/info.css">
     <!--Ícones Material Design-->
     <link rel="stylesheet" href="css/materialdesignicons.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
 
 
 </head>
@@ -28,34 +28,35 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="info" class="page">
+            <div data-name="pagamento" class="page">
+
+
 
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
-                        <h1 class="" id="totalCost"></h1>
-                    </div>
-                    <div class="infoPayment">
-                        <h2 class="mb-4">Informações</h2>    
-                        <p>Vaga: <span id="vacancy"></span></p>
-                        <p>Tempo Usado: <span id="time"></span></p>
-                        <p>Valor p/ hora :  <span id="price"></span></p>
-                        <p>Código para Entrada: <span id="vacancyId"></span></p>
-                    </div>
-                    <div class="block">
-                        <button class="button button-fill button-round" onclick="paymentVacancy()">Finalizar e pagar</button>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div id="barcode-container"></div>    
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <!-- Path to Framework7 Library Bundle JS-->
     <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
-	<!-- jQuery -->
-	<script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>	
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
     <!-- Roteamento do app-->
     <script type="text/javascript" src="js/routes.js"></script>
     <script src="cordova.js"></script>
+
+    
+
 </body>
+<script>
+
+</script>
 
 </html>
