@@ -130,6 +130,11 @@ iframe{
 #totalCost{
     color: var(--cor4);
 }
+/*Pagamento*/
+#qrcode img{
+    width: 200px;
+}
+
 
 /*vagas*/
 

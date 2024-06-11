@@ -182,6 +182,7 @@ var app = new Framework7({
 			on: {
 				pageBeforeIn: function (event, page) {
 					checkAuth()
+					gerarPixFicticioComErro()
 				},
 				pageAfterIn: function (event, page) {
 					// fazer algo depois da página ser exibida
@@ -201,7 +202,6 @@ var app = new Framework7({
 			on: {
 				pageBeforeIn: function (event, page) {
 					checkAuth()
-					generateRandomBarcode()
 				},
 				pageAfterIn: function (event, page) {
 					// fazer algo depois da página ser exibida
@@ -341,4 +341,14 @@ function rendImg() {
 			}
 		}
 	})
+}
+
+function gerarPixFicticioComErro() {
+	const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,-';
+    let codigo = '';
+    for (let i = 0; i < 50; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres.charAt(indiceAleatorio);
+    }
+    document.getElementById('copyCodePix').innerText = codigo
 }

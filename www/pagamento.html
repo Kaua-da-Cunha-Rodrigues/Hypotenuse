@@ -18,7 +18,6 @@
 
     <link rel="stylesheet" href="css/index.css">
 
-
 </head>
 
 <body>
@@ -35,8 +34,18 @@
                 <!-- Scrollable page content -->
                 <div class="page-content">
                     <div class="block">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div id="barcode-container"></div>    
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <div id="qrcode">
+                                <img src="img/qrCode.png" alt="Qr Code">
+                            </div>
+                            <div class="mt-2 text-light">
+                                <span id="copyCodePix"></span>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <a class="button button-fill button-round" href="/home/">
+                                Voltar
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -52,11 +61,6 @@
     <script type="text/javascript" src="js/routes.js"></script>
     <script src="cordova.js"></script>
 
-    
-
 </body>
-<script>
-
-</script>
 
 </html>
